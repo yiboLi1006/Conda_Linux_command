@@ -1,0 +1,46 @@
+使用镜像源：
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2
+ 
+conda config --set show_channel_urls yes //设置搜索时显示通道地址
+——————————————————————————————————
+activate // 切换到base环境
+
+activate env // 切换到env环境
+——————————————————————————————————
+conda create -n env python=3 // 创建一个环境并指定python版本为3(的最新版本)
+
+conda remove -n env --all // 删除env环境   及  下属所有包
+
+conda env list // 列出conda管理的所有环境
+
+conda list // 列出当前环境的所有包
+
+conda create --name newName --clone oldName // 复制一个环境
+——————————————————————————————————
+conda --version //conda版本查看
+
+conda update conda  //conda更新
+
+conda update package //更新包
+
+conda update --all //更新所有包
+——————————————————————————————————
+conda search package //查询可以安装的package包
+
+conda install package //安装package包
+
+pip install package -i https://pypi.tuna.tsinghua.edu.cn/simple //安装时指定镜像源
+
+pip install git+'url'.git //通过在github上安装package
+
+python setup.py install  //本地使用setup.py安装
+
+pip install xxx.whl   // 本地使用.whl文件安装
+
+conda update package 更新package包
+
+conda remove package //卸载package包
+
+conda env remove -n 'name'  //删除name环境

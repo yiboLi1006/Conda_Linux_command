@@ -1,0 +1,128 @@
+address ：124.221.140.193
+username：yiboli
+password:ek=1/2mv2
+
+export PATH=home/yiboli/anaconda3/bin:$PATH
+source ~/.bashrc
+———————————————————————————————————————
+###系统命令
+
+ip a           #查看ip地址
+ip addr        #查看ip地址
+ping           #ping网络(测试网络连通)
+ip             #目标机器的ip
+date           #查看系统时间
+logout         #注销
+shutdown now   #关机
+reboot         #重启
+clear          #清屏
+
+
+useradd name   # 添加用户
+userdel name   # 删除用户
+passwd name    # 给用户设置密码 
+su name 		  # 切换用户（switch user）
+————————————————————————————————————
+
+###文件系统简介
+ 
+”     [yiboli@VM-16-17-centos ~]$  “ 中的~代表当前用户，则：“ ~/home/ ” 代表当前用户的home文件
+
+只有一个顶级目录，不分C盘、D盘、E盘，而是成树状结构
+在 ”  / “下分bin,sbin,boot,dev,etc,home（用户目录）,root(超级用户),lip,usr,var一级子目录
+例： /home/users/test.py
+
+普通用户仅能操作对应用户目录，超级用户可操作所有
+
+————————————————————————————————————
+
+###文件管理命令
+
+ls [-参数1参数2] [目标文件夹]      
+               #查看文件列表
+ls             #查看当前目录下的文件列表（list）
+ls /obj        #查看指定目录下的文件
+ls -l          #查看文件列表的详细信息，元数据信息(用户、组、大小、创建时间、权限信息、文件类型)
+               文件权限：r:可读
+                       w:可写
+                       x:(execute)可执行
+                               权限信息格式：d xxx xxx xxx 三部分分别为：自己，同组用户，其他用户,d表示drectory文件夹，无d表示是一个文件
+                               （例：rwx rw- ---表示：自己可读可写可执行，同组用户可读可写，其他用户不可读不可写不可运行）
+
+chmod o+w name  # 使别人（other）对name文件可写
+chmod a-r name  # 使所有人（all）对name文件不可读
+                # u用户自己（uesr）
+ls -a           #查看隐藏文件	
+ls -la          #参数并用
+
+cd /obj/       #切换至目录obj，无参数时代表返回主目录（用户目录）（current directory）
+cd /绝对路径/             #绝对路径切换(绝对路径：从头开始表示的路径)
+cd /相对路径/             #相对路径切换（“.”表示当前目录，“..”表示上级目录）
+             （  例：“../hello/”表示上级目录下的hello目录）
+             （ 例：切换到/etc/sysconfig/networks-scripts 目录下 ）
+pwd                      #显示当前目录
+mkdir name               #在当前位置新建文件夹name（make directoty）
+mkdir -p /a/b/name       #使用p参数，沿指定目录，创建层次文件夹
+touch name               #在当前目录下新建文件
+
+rmdir name               #删除空目录name
+rm 文件                   #删除文件	
+rm -r 文件夹              #删除文件夹
+rm -rf  文件夹               #不询问方式强制删除name目录及其子项(r表示递归recursive，f表示force)
+
+cp 原文件 新文件            #拷贝文件
+cp -rf 源文件夹 新文件夹     #拷贝文件及其子项
+
+mv 文件  文件夹             #移动源文件到目标文件夹中
+mv 文件A 文件B              #修改文件A的名字为文件B
+
+in -s obj name             #给obj创建名为name的软链接
+
+tar -cvf name.tar file                     #将文件归档(c：creat创建，v:verbose显示详情，f:file文件)
+tar -cvf name.tar file1 file2 file 3       #将多个文件归档
+tar -xvf obj.tar                           #将文件解压至默认当前文件夹
+tar -xvf obj.tar -C location/              #将文件解压到指定文件夹
+
+tar -czvf name.tar.gz file                 #将文件归档并压缩(c：creat创建，v:verbose显示详情，f:file文件)
+tar -czvf name.tar.gz file1 file2 file 3   #将多个文件归档并压缩
+tar -xzvf obj.tar.gz                       #将文件解压至默认当前文件夹
+tar -xzvf obj.tar.gz -C location/          #将文件解压到指定文件夹
+
+
+md5sum 文件名                               #获取文件的md5指纹(数字签名)
+数字签名：又称数字指纹，可以验证文件是否被修改，一个文件通过计算得到的一串字符串
+        文件内容的唯一标记(文件内容不变,指纹不会变)
+
+文本内容查看命令
+cat 文件名                                  #查看文件中的全部信息(适合查看小文档)
+less 文件名                                 #以分页的方式浏览文件信息(适合查看大文档)，进入浏览模式
+#浏览模式快捷键:
+↑          #上一行
+↓          #下一行
+G          #第一页
+g          #最后一页
+空格        #下一页
+/关键词     #搜索关键词
+q          #退出浏览模式，回到Linux命令行模式
+
+
+tail -f 文件名                             #实时滚动显示文件的最后10行信息(默认10行)
+tail -n 20 文件名                          #显示文件的最后20行信息
+tail -n -20 文件名                         #显示文件信息从第20行至文件末尾
+tail -n +20 文件名
+
+
+文件名查找
+# 语法
+	find 搜索路径 -name "文件名关键词"
+# 例子
+	find / -name "passwd"
+	find / -name "ifcfg-*"
+文件内容查找
+# 语法
+	grep -参数 要查找的目录范围
+	#参数
+	-n 显示查找结果所在行号
+	-R 递归查找目录下的所有文件
+例:  grep aries /etc
+     grep aries /etc/passwd
