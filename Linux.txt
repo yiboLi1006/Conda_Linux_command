@@ -1,9 +1,3 @@
-address ：124.221.140.193
-username：yiboli
-password:ek=1/2mv2
-
-export PATH=home/yiboli/anaconda3/bin:$PATH
-source ~/.bashrc
 ———————————————————————————————————————
 ###系统命令
 
